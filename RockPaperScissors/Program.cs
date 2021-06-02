@@ -120,6 +120,12 @@ namespace RockPaperScissors
             return RESULTS[user1Choice, user2Choice]; 
         }
 
+        /*
+            FUNCTION: startGame
+            USAGE: RUN 1 GAME OF RPS
+            INPUT: NONE
+            RETURNS: NONE
+        */
         public void startGame()
         {
             int roundResult = 0;
