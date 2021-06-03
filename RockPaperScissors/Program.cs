@@ -17,7 +17,7 @@ namespace RockPaperScissors
             {
                 game.startGame();
                 do{
-                    Console.WriteLine("Would continue to test your luck and play again????????? >:D");
+                    Console.WriteLine("Would continue to test your luck and play again????????? >:D (Y/n)");
                     response = Console.ReadLine();
                     response = response.ToUpper();
                 }while(!(response == "Y" || response == "N"));
@@ -84,7 +84,11 @@ namespace RockPaperScissors
                 
                 //Parse Response and check for valid answer
                 validResponse = int.TryParse(choice, out playerChoice);
-                if(playerChoice < 0 || playerChoice > 2) validResponse = false;
+                if(playerChoice < 0 || playerChoice >= CHOICES.Length)
+                {
+                    validResponse = false;
+                    Console.WriteLine("\t Invalid choice. Are you tryna cheat?\n");
+                } 
             }
             
             return playerChoice;
@@ -111,12 +115,12 @@ namespace RockPaperScissors
         */
         public int startRound(int round = 0)
         {
-            Console.WriteLine("\n" +"Round " + round + " start!");
+            Console.WriteLine("\n\t" +"Round " + round + " start!");
             
             int user1Choice = getUserChoice();
-            Console.WriteLine(user1 + " chose " + CHOICES[user1Choice] + ".");
+            Console.WriteLine("\t" + user1 + " chose " + CHOICES[user1Choice] + ".");
             int user2Choice = RNJesusComputerResponse();
-            Console.WriteLine(user2 + " chose " + CHOICES[user2Choice] + ".");
+            Console.WriteLine("\t" + user2 + " chose " + CHOICES[user2Choice] + ".");
             return RESULTS[user1Choice, user2Choice]; 
         }
 
@@ -134,6 +138,7 @@ namespace RockPaperScissors
             for(int i=0; i<roundsPerGame; i++)
             {
                 roundResult = startRound(i+1);
+                Console.Write("\t");
                 switch(roundResult)
                 {
                     case 1:
