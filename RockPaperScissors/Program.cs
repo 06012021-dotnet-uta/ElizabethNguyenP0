@@ -114,9 +114,9 @@ namespace RockPaperScissors
             Console.WriteLine("\n" +"Round " + round + " start!");
             
             int user1Choice = getUserChoice();
-            Console.WriteLine(user1 + " chose " + CHOICES[user1Choice]);
+            Console.WriteLine(user1 + " chose " + CHOICES[user1Choice] + ".");
             int user2Choice = RNJesusComputerResponse();
-            Console.WriteLine(user2 + " chose " + CHOICES[user2Choice]);
+            Console.WriteLine(user2 + " chose " + CHOICES[user2Choice] + ".");
             return RESULTS[user1Choice, user2Choice]; 
         }
 
@@ -166,7 +166,7 @@ namespace RockPaperScissors
             }
             totalGamesPlayed++;
             
-            Console.WriteLine("\n" + totalGamesPlayed + " GAMES RESULTS:");
+            Console.WriteLine("\n" + totalGamesPlayed + " GAME PLAYED:");
             Console.WriteLine(user1 + " won " + totalGamesUser1Won + " games.");
             Console.WriteLine(user2 + " won " + (totalGamesPlayed-totalGamesUser1Won-totalGamesTied) + " games.");
             Console.WriteLine(totalGamesTied + " games tied.");
