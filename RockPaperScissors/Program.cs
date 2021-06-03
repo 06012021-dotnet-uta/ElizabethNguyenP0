@@ -135,9 +135,13 @@ namespace RockPaperScissors
             int roundResult = 0;
             int roundsWon = 0;
             int roundsTied = 0;
+            
+            //Plays the RPS roundsPerGame Times
             for(int i=0; i<roundsPerGame; i++)
             {
+                //Runs 1 round of RPS
                 roundResult = startRound(i+1);
+                //Calculate who won the Round and Update Round Win Stats
                 Console.Write("\t");
                 switch(roundResult)
                 {
@@ -155,6 +159,8 @@ namespace RockPaperScissors
                         break;
                 }
             }
+
+            //Check who won the game and update the TOTAL GAMES RESULTS
             if(roundsWon > 0)
             {
                 Console.WriteLine(user1 + " wins this game");
@@ -171,6 +177,7 @@ namespace RockPaperScissors
             }
             totalGamesPlayed++;
             
+            //Print Game Results
             Console.WriteLine("\n" + totalGamesPlayed + " GAME PLAYED:");
             Console.WriteLine(user1 + " won " + totalGamesUser1Won + " games.");
             Console.WriteLine(user2 + " won " + (totalGamesPlayed-totalGamesUser1Won-totalGamesTied) + " games.");
