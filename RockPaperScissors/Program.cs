@@ -11,7 +11,7 @@ namespace RockPaperScissors
             Console.WriteLine("Hello! Who are you?");
             game.user1 = Console.ReadLine();
 
-            Console.WriteLine(game.user1 + ", let's play Rock, Paper, Scissors!!!!!");
+            Console.WriteLine("\t" + game.user1 + ", let's play Rock, Paper, Scissors!!!!!");
             
             do
             {
@@ -37,24 +37,24 @@ namespace RockPaperScissors
             RPS GAME INSTANCE VARIABLES
         ****************************************/
         //public enum Choices {ROCK=0, PAPER=1, SCISSORS=2} //Possible RPS Choices
-        public string[] CHOICES = {"ROCK", "PAPER", "SCISSORS"};
+        public string[] CHOICES {get;} = {"ROCK", "PAPER", "SCISSORS"};
 
         /*
             RESULTS is a table to be use as RESULTS[PLAYER1][PLAYER2]
             SUCH THAT 1 = PLAYER1 WIN, 0 = TIE, -1 = PLAYER2 WIN
             I'm NOT CHEATING. I just use lookup tables all the time writing firmware. I only looked up how to use multi-dimensonal arrays.
         */
-        public int[,] RESULTS = new int[,] 
+        public int[,] RESULTS {get;} = new int[,] 
         { {0, -1, 1},
           {1, 0, -1},
           {-1, 1, 0}
         };
-        public int roundsPerGame = 3;
-        public int totalGamesPlayed = 0;
-        public int totalGamesUser1Won = 0;
-        public int totalGamesTied = 0;
-        public string user1 = "Player 1";
-        public string user2 = "Computer";
+        public int roundsPerGame {get; set;} = 3;
+        private int totalGamesPlayed = 0;
+        private int totalGamesUser1Won = 0;
+        private int totalGamesTied = 0;
+        public string user1 {get;set;} = "Player 1";
+        public string user2 {get;set;} = "Computer";
         
         /****************************************
             RPS GAME INSTANCE FUNCTIONS
