@@ -16,6 +16,7 @@ namespace P0._1._0
         CartPage CartPage = new CartPage();
         ProductPage ProductPage = new ProductPage();
         EditCartPage EditCartPage = new EditCartPage();
+        HistoryPage HistoryPage = new HistoryPage();
         
         Brain Logic = new Brain();
         public MenuStateMachine()
@@ -30,7 +31,8 @@ namespace P0._1._0
             ShoppingMenu = 2,
             CartMenu = 3,
             ProductMenu = 4,
-            EditCartMenu = 5
+            EditCartMenu = 5,
+            HistoryMenu = 6
         };
         
         public void Start()
@@ -97,7 +99,7 @@ namespace P0._1._0
                                 CurrentMenu = Menus.CartMenu;
                                 break;
                             case 4:
-                                Console.WriteLine("Eventual Checkout Function."); 
+                                Logic.Checkout(); 
                                 Option = GetValid.OptionChoice(ShoppingPage.Options);
                                 break;
                             case 5:
@@ -107,6 +109,9 @@ namespace P0._1._0
                             case 6:
                             default:
                                 CurrentMenu = Menus.Exit;
+                                break;
+                            case 7:
+                                CurrentMenu = Menus.HistoryMenu;
                                 break;
                         }
                         break;
@@ -126,7 +131,7 @@ namespace P0._1._0
                                 CurrentMenu = Menus.ProductMenu;
                                 break;
                             case 3:
-                                Console.WriteLine("Eventual Checkout Functions");
+                                Logic.Checkout();
                                 break;
                             case 4:
                                 Logic.EmptyShoppingCart();
@@ -156,7 +161,7 @@ namespace P0._1._0
                                 CurrentMenu = Menus.ProductMenu;
                                 break;
                             case 4:
-                                Console.WriteLine("Eventually CheckOut Function");
+                                Logic.Checkout();
                                 break;
                             case 5:
                                 Logic.EmptyShoppingCart();
@@ -196,6 +201,35 @@ namespace P0._1._0
                         }
                         break;
 
+                    case Menus.HistoryMenu:
+
+                        Console.WriteLine("\nOrder History By Customer:");
+                        Logic.ViewOrderHistoryByCustomer();
+
+                        Console.WriteLine("\nOrder History By Location:");
+                        Logic.ViewOrderHistoryByLocation();
+                        Console.WriteLine();
+
+                        Option = GetValid.OptionChoice(ProductPage.Options);
+                        switch (Option)
+                        {
+                            case 1:
+                                CurrentMenu = Menus.ProductMenu;
+                                break;
+                            case 2:
+                                CurrentMenu = Menus.ShoppingMenu;
+                                break;
+                            case 3:
+                                Logic.EmptyShoppingCart();
+                                CurrentMenu = Menus.LoginMenu;
+                                break;
+                            case 4:
+                            default:
+                                CurrentMenu = Menus.Exit;
+                                break;
+                        }
+                        break;
+                    
                     case Menus.Exit:
                     default:
                         break;

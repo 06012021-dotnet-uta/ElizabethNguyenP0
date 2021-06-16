@@ -76,6 +76,7 @@ namespace ApplicationLayer
             //Options.Add("View Your Order History");
             //Options.Add("View Store's Order History");
             Options.Add("Exit");
+            Options.Add("View Order History");
         }
         public string PageName { get; set; }
         public string PageHeader { get; set; }
@@ -135,6 +136,25 @@ namespace ApplicationLayer
             Options.Add("View item details");
             Options.Add("Add item to cart");
             Options.Add("Return to Home Menu");
+            Options.Add("LogOut");
+            Options.Add("Exit");
+        }
+        public string PageName { get; set; }
+        public string PageHeader { get; set; }
+        public string MenuPrompt { get; set; }
+        public List<string> Options { get; set; } = new List<string>();
+    }
+
+    public class HistoryPage : IPage
+    {
+        public HistoryPage()
+        {
+            PageName = "History Menu";
+            PageHeader = "History Menu";
+            MenuPrompt = "What would you like to do?";
+
+            Options.Add("View Products at this Location");
+            Options.Add("Go to Home Menu");
             Options.Add("LogOut");
             Options.Add("Exit");
         }

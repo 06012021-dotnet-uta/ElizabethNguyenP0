@@ -7,7 +7,6 @@ namespace ApplicationLayer
     {
         public GetValid()
         {
-            //Console.WriteLine("Get Valid Class initialized");
         }
 
         static public int Age()

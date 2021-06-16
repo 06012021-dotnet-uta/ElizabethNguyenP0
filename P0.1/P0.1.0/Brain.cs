@@ -305,15 +305,72 @@ namespace P0._1._0
 
         public bool Checkout()
         {
+            Console.WriteLine("Beginning CheckOut");
+
             Order thisOrder = new Order();
             thisOrder.LocationId = SessionLocation.LocationId;
             thisOrder.CustomerId = SessionUser.CustomerId;
-            
-            foreach(var item in SessionCart)
-            {
+            thisOrder.OrderDate = DateTime.Now;
 
+            try
+            {
+                context.Orders.Add(thisOrder);
+                context.SaveChanges();
             }
+            catch
+            {
+                Console.WriteLine("Unable to Insert Order.");
+            };
+
+            IEnumerable<Order> RecentOrders = context.Orders.Where(row => row.OrderDate == thisOrder.OrderDate).ToList();
+
+            Console.WriteLine("Potentially the recorded Order:");
+            foreach (var order in RecentOrders)
+            {
+                Console.WriteLine(order.OrderId + ": " + order.OrderDate);
+            }
+
+            
+            foreach (var item in SessionCart)
+            {
+                List<Inventory> LocationIventory = context.Inventories.Where(row => row.LocationId == SessionLocation.LocationId && row.ProductId == item.ProductId).ToList();
+                foreach(var stock in LocationIventory)
+                {
+                    stock.Amount -= item.Amount;
+                }
+            }
+
+            context.SaveChanges();
+            
+            return true;
         }
 
+        public bool ViewOrderHistoryByCustomer()
+        {
+            List<Order> Orders = context.Orders.Where(row => row.CustomerId == SessionUser.CustomerId).ToList();
+            Location location = new Location();
+            Customer Buyer = new Customer();
+            foreach(var order in Orders)
+            {
+                location = Fetch.LocationInfo(order.LocationId);
+                Buyer = Fetch.GetUserInfo(order.CustomerId);
+                Console.WriteLine(order.OrderId + " " + Buyer.UserName + ": @ " + order.OrderDate + " @ " + location.LocationName);
+            }
+            return true;
+        }
+
+        public bool ViewOrderHistoryByLocation()
+        {
+            List<Order> Orders = context.Orders.Where(row => row.LocationId == SessionLocation.LocationId).ToList();
+            Location location = new Location();
+            Customer Buyer = new Customer();
+            foreach (var order in Orders)
+            {
+                location = Fetch.LocationInfo(order.LocationId);
+                Buyer = Fetch.GetUserInfo(order.CustomerId);
+                Console.WriteLine(order.OrderId + " " + Buyer.UserName + ": @ " + order.OrderDate + " @ " + location.LocationName);
+            }
+            return true;
+        }
     }
 }
